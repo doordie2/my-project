@@ -1,0 +1,60 @@
+<page-header [title]="'基础表单'">
+  将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。
+</page-header>
+<nz-card [nzLoading]="loading" [nzBordered]="false" class="ant-card__body-nopadding sales-card">
+  <nz-tabset [nzTabBarExtraContent]="extraTemplate">
+    <nz-tab [nzTitle]="'销售额'">
+      <div nz-row>
+        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="16">
+          <div class="bar">
+            <g2-bar height="295" [title]="'销售趋势'" [data]="data.salesData"></g2-bar>
+          </div>
+        </div>
+        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8">
+          <div class="rank">
+            <h4 class="ranking-title">{{ '门店销售额排名'}}</h4>
+            <ul class="rank-list">
+              <li *ngFor="let i of rankingListData; let idx = index">
+                <span class="number" [ngClass]="{'active': idx < 3}">{{idx+1}}</span>
+                <span class="title">{{i.title}}sss{{idx+1}}</span>
+                <span class="value">{{i.total | number: '3.0'}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab [nzTitle]="'客流量'">
+      <div nz-row>
+        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="16">
+          <div class="bar">
+            <g2-bar height="295" [title]="'销售趋势'" [data]="data.salesData"></g2-bar>
+          </div>
+        </div>
+        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8">
+          <div class="rank">
+            <h4 class="ranking-title">{{ '门店销售额排名'}}</h4>
+            <ul class="rank-list">
+              <li *ngFor="let i of rankingListData; let idx = index">
+                <span class="number" [ngClass]="{'active': idx < 3}">{{idx+1}}</span>
+                <span class="title">{{i.title}}{{idx+1}}</span>
+                <span class="value">{{i.total | number: '3.0'}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nz-tab>
+    <ng-template #extraTemplate>
+      <div class="sales-extra-wrap">
+        <div class="sales-extra">
+          <a (click)="setDate('-today')">昨日</a>
+          <a (click)="setDate('week')">本周</a>
+          <a (click)="setDate('month')">本月</a>
+          <a (click)="setDate('year')">本年</a>
+        </div>
+        <nz-range-picker [(ngModel)]="date_range" style="display:inline-block; width: 256px;"></nz-range-picker>
+      </div>
+    </ng-template>
+  </nz-tabset>
+</nz-card>

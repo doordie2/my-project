@@ -1,0 +1,52 @@
+<page-header [title]="'基础表单'">
+  将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。
+</page-header>
+<div nz-row nzGutter="16">
+  <div nz-col nzXs="24" nzMd="6">
+    <nz-card [nzBordered]="false" [nzTitle]="a">
+      <ng-template #a>
+        <small class="text-sm font-weight-normal">总销售额
+        </small>
+      </ng-template>
+      <span>{{totalSales}}</span>
+    </nz-card>
+  </div>
+  <div nz-col nzXs="24" nzMd="6">
+    <nz-card [nzTitle]="b" [nzBordered]="false">
+      <ng-template #b>
+        <small class="text-sm font-weight-normal">客服数量
+        </small>
+      </ng-template>
+      <span>{{serviceNum}}</span>
+    </nz-card>
+  </div>
+  <div nz-col nzXs="24" nzMd="6">
+    <nz-card [nzBordered]="false" [nzTitle]="c">
+      <ng-template #c>
+        <small class="text-sm font-weight-normal">今日咨询人数
+        </small>
+      </ng-template>
+      <span>{{consultNum}}</span>
+    </nz-card>
+  </div>
+  <div nz-col nzXs="24" nzMd="6">
+    <nz-card [nzBordered]="false" [nzTitle]="d">
+      <ng-template #d>
+        <small class="text-sm font-weight-normal">回复率
+        </small>
+      </ng-template>
+      <span>{{reversionRate}}</span>
+    </nz-card>
+  </div>
+</div>
+
+<div nz-row nzGutter="16">
+  <div nz-col nzXs="24" nzMd="24">
+    <nz-card [nzBordered]="false" [nzTitle]="e">
+      <ng-template #e>
+        <small class="text-sm font-weight-normal">近30天日活统计</small>
+      </ng-template>
+      <g2-bar height="275" [data]="salesData"></g2-bar>
+    </nz-card>
+  </div>
+</div>
