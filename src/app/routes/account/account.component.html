@@ -1,0 +1,65 @@
+<page-header [title]="'账号列表'">
+</page-header>
+<div nz-row nzGutter="16">
+  <div nz-col nzXs="24" nzMd="24">
+    <nz-card [nzBordered]="false">
+      <button nz-button (click)="edit(serviceEdit)" [nzType]="'primary'">
+        <i nz-icon type="edit"></i>
+        <span>客服设置</span>
+      </button>
+      <button nz-button (click)="groupSend(modalContent)" [nzType]="'primary'">
+        <i nz-icon type="dingding"></i>
+        <span>群发</span>
+      </button>
+
+      <nz-input-group nzSearch nzSize="large" [nzSuffix]="suffixButton"
+                      style="width: 520px;margin-left: 10px">
+        <input type="text" nz-input placeholder="请输入关键字" [(ngModel)]="keyword">
+        <ng-template #suffixButton>
+          <button nz-button nzType="primary" nzSize="large" nzSearch (click)="this.st.reload({keyword:this.keyword})"><i nz-icon type="search"></i>搜索</button>
+        </ng-template>
+      </nz-input-group>
+      <st #st [columns]="columns" [data]="data" [loading]="loading" [req]="req" [res]="res" (checkboxChange)="checkboxChange($event)" [loading]="loading">
+        <ng-template st-row="status" let-i>
+          <nz-badge [nzStatus]="i.statusType"
+                    [nzText]="i.statusText"></nz-badge>
+        </ng-template>
+      </st>
+    </nz-card>
+  </div>
+</div>
+
+<ng-template #modalContent>
+  <nz-form-item>
+    <nz-form-control>
+      <div>
+      <label>群发内容:</label>
+      <textarea style="width: 300px" nz-input [(ngModel)]="masstext" name="masstext"
+                placeholder="群发内容" id="masstext"></textarea>
+      </div>
+      <div>
+      <label>过滤关键字:<i nz-icon type="question-circle"></i></label>
+      <textarea   style="width: 300px" nz-input [(ngModel)]="masskey" name="masskey" placeholder="群发关键字，多条关键字用，隔开"
+                id="masskey"></textarea>
+      </div>
+      <div>
+      <label>群发条件:<i nz-icon type="question-circle"></i></label>
+        <nz-radio-group [(ngModel)]="masstype">
+          <label nz-radio nzValue="1">包含关键字(好友备注)</label>
+          <label nz-radio nzValue="2">不包含关键字(好友备注)</label>
+        </nz-radio-group>
+      </div>
+      <div>
+      <label>群发间隔时间:</label>
+      <nz-input-number [nzMin]="5" [nzMax]="100" [nzStep]="1" [(ngModel)]="masstime"></nz-input-number>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+</ng-template>
+
+<ng-template #serviceEdit>
+  <nz-select style="width: 300px" [(ngModel)]="selectedValue">
+    <nz-option *ngFor="let select of selectData" [nzLabel]="select.kfNickName" [nzValue]="select.kfId"></nz-option>
+  </nz-select>
+</ng-template>
+

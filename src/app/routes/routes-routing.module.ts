@@ -15,22 +15,26 @@ import { UserLockComponent } from './passport/lock/lock.component';
 import { Exception403Component } from './exception/403.component';
 import { Exception404Component } from './exception/404.component';
 import { Exception500Component } from './exception/500.component';
-import { SysComponent } from './sys/sys.component';
-import { SytComponent } from './syt/syt.component';
+import { DataComponent } from './data/data.component';
+import { KfComponent } from './kf/kf.component';
 import { SyuComponent } from './syu/syu.component';
-import { SyvComponent } from './syv/syv.component';
+import { AccountComponent } from './account/account.component';
 import { JWTGuard, SimpleGuard } from '@delon/auth';
+import { ComtextComponent } from './comtext/comtext.component';
+import { GroupComponent } from './group/group.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutDefaultComponent,
     children: [
-      { path: '', redirectTo: 'sys', pathMatch: 'full' },
-      { path: 'sys', component: SysComponent,canActivate: [JWTGuard ],data: { title: '我的菜单', titleI18n: 'sys' ,guard: 'user'} },
-      { path: 'syt', component: SytComponent, canActivate: [JWTGuard ],data: { title: '客服管理', titleI18n: 'syt' } },
+      { path: '', redirectTo: 'data', pathMatch: 'full' },
+      { path: 'data', component: DataComponent,canActivate: [JWTGuard ],data: { title: '我的菜单', titleI18n: 'data' ,guard: 'user'} },
+      { path: 'kf', component: KfComponent, canActivate: [JWTGuard ],data: { title: '客服管理', titleI18n: 'kf' } },
       { path: 'syu', component: SyuComponent, canActivate: [SimpleGuard ],data: { title: '日常', titleI18n: 'syu' } },
-      { path: 'syv', component: SyvComponent, canActivate: [SimpleGuard ],data: { title: '授权回调', titleI18n: 'syv' } },
+      { path: 'account', component: AccountComponent, canActivate: [SimpleGuard ],data: { title: '账号管理', titleI18n: 'account' } },
+      { path: 'comtext', component: ComtextComponent, canActivate: [SimpleGuard ],data: { title: '快捷语', titleI18n: 'comtext' } },
+      { path: 'group', component: GroupComponent, canActivate: [SimpleGuard ],data: { title: '群发助手', titleI18n: 'group' } }
       // 业务子模块
       // { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' }
     ]

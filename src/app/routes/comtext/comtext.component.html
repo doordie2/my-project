@@ -1,0 +1,28 @@
+<page-header [title]="'快捷语列表'">
+</page-header>
+<div nz-row nzGutter="16">
+  <div nz-col nzXs="24" nzMd="24">
+    <nz-card [nzBordered]="false">
+      <button nz-button (click)="add(modalContent)" [nzType]="'primary'">
+        <i nz-icon type="plus"></i>
+        <span>添加快捷语</span>
+      </button>
+      <st #st [columns]="columns" [data]="data" [loading]="loading" [req]="req" [res]="res" (checkboxChange)="checkboxChange($event)">
+        <ng-template st-row="status" let-i>
+          <nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText"></nz-badge>
+        </ng-template>
+      </st>
+    </nz-card>
+  </div>
+</div>
+
+<ng-template #modalContent>
+  <nz-form-item>
+    <nz-form-control>
+      <label>快捷语类型</label>
+      <input nz-input [(ngModel)]="mark" name="mark" placeholder="请输入快捷语类型" id="mark">
+      <label>快捷语内容</label>
+      <textarea nz-input [(ngModel)]="text" name="text" placeholder="请输入快捷语内容" id="text" style="height: 150px"></textarea>
+    </nz-form-control>
+  </nz-form-item>
+</ng-template>

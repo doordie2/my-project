@@ -12,10 +12,10 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
       {{settings.user.name}}
     </div>
     <div nz-menu class="width-sm">
-      <div nz-menu-item routerLink="/pro/account/center"><i class="anticon anticon-user mr-sm"></i>
+      <div nz-menu-item><i class="anticon anticon-user mr-sm"></i>
         个人中心
       </div>
-      <div nz-menu-item routerLink="/pro/account/settings"><i class="anticon anticon-setting mr-sm"></i>
+      <div nz-menu-item><i class="anticon anticon-setting mr-sm"></i>
         个人设置
       </div>
       <li nz-menu-divider></li>

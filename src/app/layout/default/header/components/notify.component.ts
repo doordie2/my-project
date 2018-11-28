@@ -9,13 +9,13 @@ import { NoticeItem, NoticeIconList } from '@delon/abc';
 @Component({
   selector: 'header-notify',
   template: `
-  <notice-icon
+  <!--<notice-icon
     [data]="data"
     [count]="count"
     [loading]="loading"
     (select)="select($event)"
     (clear)="clear($event)"
-    (popoverVisibleChange)="loadData()"></notice-icon>
+    (popoverVisibleChange)="loadData()"></notice-icon>-->
   `,
 })
 export class HeaderNotifyComponent {

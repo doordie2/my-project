@@ -93,12 +93,25 @@ export class StartupService {
         children: [
           {
             text: '数据统计',
-            link: '/sys',
+            link: '/data',
             icon: { type: 'icon', value: 'appstore' }
           },{
             text: '客服管理',
-            link: '/syt',
+            link: '/kf',
             icon: { type: 'icon', value: 'info' }
+          },
+          {
+            text: '账号管理',
+            link: '/account',
+            icon: { type: 'icon', value: 'bulb' }
+          },{
+            text: '快捷语',
+            link: '/comtext',
+            icon: { type: 'icon', value: 'edit' }
+          },{
+            text: '群发助手',
+            link: '/group',
+            icon: { type: 'icon', value: 'edit' }
           },{
             text: '日常',
             link: '/syu',

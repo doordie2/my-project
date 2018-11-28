@@ -14,12 +14,16 @@ import { UserLockComponent } from './passport/lock/lock.component';
 import { Exception403Component } from './exception/403.component';
 import { Exception404Component } from './exception/404.component';
 import { Exception500Component } from './exception/500.component';
-import { SysComponent } from './sys/sys.component';
-import { SytComponent } from './syt/syt.component';
+import { DataComponent } from './data/data.component';
+import { KfComponent } from './kf/kf.component';
 import { SyuComponent } from './syu/syu.component';
 import { DelonAuthModule, JWTInterceptor } from '@delon/auth';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SyvComponent } from './syv/syv.component';
+import { AccountComponent } from './account/account.component';
+import { ComtextComponent } from './comtext/comtext.component';
+import { ComtextModalComponent } from './comtext/comtext.modal.component';
+import { GroupComponent } from './group/group.component';
+import { KfModalComponent } from './kf/kf.modal.component';
 
 
 const COMPONENTS = [
@@ -34,12 +38,17 @@ const COMPONENTS = [
   Exception403Component,
   Exception404Component,
   Exception500Component,
-  SysComponent,
-  SytComponent,
+  DataComponent,
+  KfComponent,
   SyuComponent,
-  SyvComponent,
+  AccountComponent,
+  ComtextComponent,
+  ComtextModalComponent,
+  GroupComponent,
+  KfModalComponent
+
 ];
-const COMPONENTS_NOROUNT = [];
+const COMPONENTS_NOROUNT = [ComtextModalComponent,KfModalComponent];
 
 @NgModule({
   imports: [ SharedModule, RouteRoutingModule,DelonAuthModule.forRoot() ],

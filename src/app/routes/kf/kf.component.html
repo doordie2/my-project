@@ -1,0 +1,32 @@
+<page-header [title]="'客服列表'">
+</page-header>
+<div nz-row nzGutter="16">
+  <div nz-col nzXs="24" nzMd="24">
+    <nz-card [nzBordered]="false">
+      <button nz-button (click)="add(modalContent)" [nzType]="'primary'">
+        <i nz-icon type="plus"></i>
+        <span>添加客服账号</span>
+      </button>
+      <st #st [columns]="columns" [data]="data" [loading]="loading" [req]="req" [res]="res" (checkboxChange)="checkboxChange($event)">
+        <ng-template st-row="status" let-i>
+          <nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText"></nz-badge>
+        </ng-template>
+      </st>
+    </nz-card>
+  </div>
+</div>
+
+<ng-template #modalContent>
+  <nz-form-item>
+    <nz-form-control>
+      <label>客服昵称</label>
+      <input nz-input [(ngModel)]="username" name="username" placeholder="请输入客服昵称">
+      <label>客服账号</label>
+      <input nz-input [(ngModel)]="account" name="account" placeholder="请输入客服账号">
+      <label>密码</label>
+      <input nz-input [(ngModel)]="password" name="password" placeholder="请输入密码">
+      <label>确认密码</label>
+      <input nz-input [(ngModel)]="passwords" name="passwords" placeholder="请输入确认密码">
+    </nz-form-control>
+  </nz-form-item>
+</ng-template>

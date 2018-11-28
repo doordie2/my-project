@@ -1,13 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import { DA_SERVICE_TOKEN, TokenService } from '@delon/auth';
-import { map, tap } from 'rxjs/operators';
+import { BaseConfig } from '../../app.config';
 
 @Component({
-  selector: 'app-sys',
-  templateUrl: './sys.component.html',
+  selector: 'app-group',
+  templateUrl: './group.component.html',
 })
-export class SysComponent implements OnInit {
+export class GroupComponent implements OnInit {
 
   constructor(
     private http: _HttpClient,
@@ -21,13 +21,12 @@ export class SysComponent implements OnInit {
   serviceNum: String;
   consultNum: String;
   reversionRate: String;
-  sales: any[] = [];
   salesData: any[] = [];
   data: any[] = [];
 
   ngOnInit() {
 
-    this.http.get('http://localhost:81/getData').subscribe((res: any) => {
+    this.http.get(BaseConfig.host+'/getData').subscribe((res: any) => {
 
 
       this.totalSales = res.data['totalSales'];
@@ -36,7 +35,7 @@ export class SysComponent implements OnInit {
       this.reversionRate = res.data['reversionRate'];
     });
 
-    this.http.get('http://localhost:81/getDatas').subscribe((res: any) => {
+    this.http.get(BaseConfig.host+'/getDatas').subscribe((res: any) => {
       this.salesData = res.data;
     });
   }

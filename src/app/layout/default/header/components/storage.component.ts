@@ -4,8 +4,8 @@ import { NzModalService, NzMessageService } from 'ng-zorro-antd';
 @Component({
   selector: 'header-storage',
   template: `
-  <i nz-icon type="tool"></i>
-  清除本地缓存
+  <!--<i nz-icon type="tool"></i>
+  清除本地缓存-->
   `
 })
 export class HeaderStorageComponent {

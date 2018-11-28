@@ -64,6 +64,8 @@ export class DefaultInterceptor implements HttpInterceptor {
         this.goTo('/passport/login');
         break;
       case 403:
+        this.goTo('/passport/login');
+        break;
       case 404:
       case 500:
         this.goTo(`/${event.status}`);
