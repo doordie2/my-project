@@ -17,21 +17,21 @@ import { Exception404Component } from './exception/404.component';
 import { Exception500Component } from './exception/500.component';
 import { DataComponent } from './data/data.component';
 import { KfComponent } from './kf/kf.component';
-import { SyuComponent } from './syu/syu.component';
 import { AccountComponent } from './account/account.component';
 import { JWTGuard, SimpleGuard } from '@delon/auth';
 import { ComtextComponent } from './comtext/comtext.component';
 import { GroupComponent } from './group/group.component';
+import { AllDataComponent } from './allData/allData.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutDefaultComponent,
     children: [
-      { path: '', redirectTo: 'data', pathMatch: 'full' },
-      { path: 'data', component: DataComponent,canActivate: [JWTGuard ],data: { title: '我的菜单', titleI18n: 'data' ,guard: 'user'} },
+      { path: '', redirectTo: 'allData', pathMatch: 'full' },
+      { path: 'allData', component: AllDataComponent,canActivate: [JWTGuard ],data: { title: '总量统计', titleI18n: 'allData'} },
+      { path: 'data', component: DataComponent,canActivate: [JWTGuard ],data: { title: '客服统计', titleI18n: 'data'} },
       { path: 'kf', component: KfComponent, canActivate: [JWTGuard ],data: { title: '客服管理', titleI18n: 'kf' } },
-      { path: 'syu', component: SyuComponent, canActivate: [SimpleGuard ],data: { title: '日常', titleI18n: 'syu' } },
       { path: 'account', component: AccountComponent, canActivate: [SimpleGuard ],data: { title: '账号管理', titleI18n: 'account' } },
       { path: 'comtext', component: ComtextComponent, canActivate: [SimpleGuard ],data: { title: '快捷语', titleI18n: 'comtext' } },
       { path: 'group', component: GroupComponent, canActivate: [SimpleGuard ],data: { title: '群发助手', titleI18n: 'group' } }

@@ -16,7 +16,6 @@ import { Exception404Component } from './exception/404.component';
 import { Exception500Component } from './exception/500.component';
 import { DataComponent } from './data/data.component';
 import { KfComponent } from './kf/kf.component';
-import { SyuComponent } from './syu/syu.component';
 import { DelonAuthModule, JWTInterceptor } from '@delon/auth';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccountComponent } from './account/account.component';
@@ -24,6 +23,7 @@ import { ComtextComponent } from './comtext/comtext.component';
 import { ComtextModalComponent } from './comtext/comtext.modal.component';
 import { GroupComponent } from './group/group.component';
 import { KfModalComponent } from './kf/kf.modal.component';
+import { AllDataComponent } from './allData/allData.component';
 
 
 const COMPONENTS = [
@@ -40,12 +40,12 @@ const COMPONENTS = [
   Exception500Component,
   DataComponent,
   KfComponent,
-  SyuComponent,
   AccountComponent,
   ComtextComponent,
   ComtextModalComponent,
   GroupComponent,
-  KfModalComponent
+  KfModalComponent,
+  AllDataComponent
 
 ];
 const COMPONENTS_NOROUNT = [ComtextModalComponent,KfModalComponent];

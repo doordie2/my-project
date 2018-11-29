@@ -92,7 +92,12 @@ export class StartupService {
         group: true,
         children: [
           {
-            text: '数据统计',
+            text: '总量统计',
+            link: '/allData',
+            icon: { type: 'icon', value: 'appstore' }
+          },
+          {
+            text: '客服统计',
             link: '/data',
             icon: { type: 'icon', value: 'appstore' }
           },{
@@ -111,10 +116,6 @@ export class StartupService {
           },{
             text: '群发助手',
             link: '/group',
-            icon: { type: 'icon', value: 'edit' }
-          },{
-            text: '日常',
-            link: '/syu',
             icon: { type: 'icon', value: 'rocket' }
           }
         ]

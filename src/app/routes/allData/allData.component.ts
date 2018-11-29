@@ -6,10 +6,10 @@ import { getTimeDistance } from '@delon/util';
 
 @Component({
   selector: 'app-data',
-  templateUrl: './data.component.html',
-  styleUrls: ['./data.component.less'],
+  templateUrl: './allData.component.html',
+  styleUrls: ['./allData.component.less'],
 })
-export class DataComponent implements OnInit {
+export class AllDataComponent implements OnInit {
 
   constructor(
     private http: _HttpClient,
@@ -23,15 +23,9 @@ export class DataComponent implements OnInit {
   reversionRate: String;
   salesData: any[] = [];
   data: any[] = [];
-  selectData:any[]=[];
-  selectedValue:String;
+  chartData: any[] = [];
 
   ngOnInit() {
-
-    //获取客服列表
-    this.http.get('http://localhost:81/v1/imweb/kf/listall').subscribe((res:any)=>{
-      this.selectData=res.data;
-    });
 
     this.http.get(BaseConfig.host+'/getData').subscribe((res: any) => {
 
@@ -49,15 +43,18 @@ export class DataComponent implements OnInit {
     for (let i = 0; i < 12; i += 1) {
       this.datas.salesData.push({
         x: `${i + 1}月`,
-        y: Math.floor(Math.random() * 1000) + 200,
+        y: Math.floor(Math.random() * 10)/100,
       });
     }
-    /*this.http.get('/chart').subscribe((res: any) => {
-      this.data = res;
-      this.loading = false;
-    });*/
 
     this.loading = false;
+
+    for (let i = 0; i < 120; i += 1) {
+      this.chartData.push({
+        x:(new Date().getTime()) + (1000 * 60 * 30 *24* i),
+        y1: Math.floor(Math.random() * 100) + 10,
+      });
+    }
   }
 
   datas: any = {
@@ -66,16 +63,19 @@ export class DataComponent implements OnInit {
   };
   loading = true;
   date_range: Date[] = [];
-  rankingListData: any[] = Array(7)
-    .fill({})
-    .map((item, i) => {
-      return {
-        title: i,
-        total: 323234,
-      };
-    });
 
   setDate(type: any) {
+    this.loading=true;
     this.date_range = getTimeDistance(type);
+
+    this.datas.salesData=[];
+    for (let i = 0; i < 12; i += 1) {
+      this.datas.salesData.push({
+        x: `${i + 1}月`,
+        y: Math.floor(Math.random() * 10) + 225,
+      });
+    }
+
+    this.loading=false
   }
 }

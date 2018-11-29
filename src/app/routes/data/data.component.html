@@ -1,4 +1,7 @@
 <page-header [title]="'数据统计'">
+  <nz-select style="width: 300px" [(ngModel)]="selectedValue">
+    <nz-option *ngFor="let select of selectData" [nzLabel]="select.kfNickName" [nzValue]="select.kfId"></nz-option>
+  </nz-select>
 </page-header>
 <div nz-row nzGutter="16">
   <div nz-col nzXs="24" nzMd="6">
@@ -49,3 +52,61 @@
     </nz-card>
   </div>
 </div>
+
+<nz-card [nzLoading]="loading" [nzBordered]="false" class="ant-card__body-nopadding sales-card">
+  <nz-tabset [nzTabBarExtraContent]="extraTemplate">
+    <nz-tab [nzTitle]="'销售额'">
+      <div nz-row>
+        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="16">
+          <div class="bar">
+            <g2-bar height="295" [title]="'销售趋势'" [data]="datas.salesData"></g2-bar>
+          </div>
+        </div>
+        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8">
+          <div class="rank">
+            <h4 class="ranking-title">{{ '门店销售额排名'}}</h4>
+            <ul class="rank-list">
+              <li *ngFor="let i of rankingListData; let idx = index">
+                <span class="number" [ngClass]="{'active': idx < 3}">{{idx+1}}</span>
+                <span class="title">{{i.title}}sss{{idx+1}}</span>
+                <span class="value">{{i.total | number: '3.0'}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nz-tab>
+    <nz-tab [nzTitle]="'客流量'">
+      <div nz-row>
+        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="16">
+          <div class="bar">
+            <g2-bar height="295" [title]="'销售趋势'" [data]="datas.salesData"></g2-bar>
+          </div>
+        </div>
+        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8">
+          <div class="rank">
+            <h4 class="ranking-title">{{ '门店销售额排名'}}</h4>
+            <ul class="rank-list">
+              <li *ngFor="let i of rankingListData; let idx = index">
+                <span class="number" [ngClass]="{'active': idx < 3}">{{idx+1}}</span>
+                <span class="title">{{i.title}}{{idx+1}}</span>
+                <span class="value">{{i.total | number: '3.0'}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nz-tab>
+    <ng-template #extraTemplate>
+      <div class="sales-extra-wrap">
+        <div class="sales-extra">
+          <a (click)="setDate('-today')">昨日</a>
+          <a (click)="setDate('week')">本周</a>
+          <a (click)="setDate('month')">本月</a>
+          <a (click)="setDate('year')">本年</a>
+        </div>
+        <nz-range-picker [(ngModel)]="date_range" style="display:inline-block; width: 256px;"></nz-range-picker>
+      </div>
+    </ng-template>
+  </nz-tabset>
+</nz-card>
