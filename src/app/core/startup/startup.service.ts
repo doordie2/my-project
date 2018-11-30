@@ -117,6 +117,10 @@ export class StartupService {
             text: '群发助手',
             link: '/group',
             icon: { type: 'icon', value: 'rocket' }
+          },{
+            text: '个人中心',
+            link: '/personal/center/settings',
+            icon: { type: 'icon', value: 'rocket' }
           }
         ]
       }

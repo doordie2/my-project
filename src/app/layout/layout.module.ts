@@ -36,6 +36,7 @@ const HEADERCOMPONENTS = [
   HeaderUserComponent
 ];
 
+
 // passport
 import { LayoutPassportComponent } from './passport/passport.component';
 const PASSPORT = [

@@ -22,6 +22,7 @@ import { JWTGuard, SimpleGuard } from '@delon/auth';
 import { ComtextComponent } from './comtext/comtext.component';
 import { GroupComponent } from './group/group.component';
 import { AllDataComponent } from './allData/allData.component';
+import { PersonalComponent } from './personal/center/personal.component';
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routes: Routes = [
       { path: 'kf', component: KfComponent, canActivate: [JWTGuard ],data: { title: '客服管理', titleI18n: 'kf' } },
       { path: 'account', component: AccountComponent, canActivate: [SimpleGuard ],data: { title: '账号管理', titleI18n: 'account' } },
       { path: 'comtext', component: ComtextComponent, canActivate: [SimpleGuard ],data: { title: '快捷语', titleI18n: 'comtext' } },
-      { path: 'group', component: GroupComponent, canActivate: [SimpleGuard ],data: { title: '群发助手', titleI18n: 'group' } }
+      { path: 'group', component: GroupComponent, canActivate: [SimpleGuard ],data: { title: '群发助手', titleI18n: 'group' } },
+      { path: 'personal', loadChildren: './personal/personal.module#PersonalModule' },
       // 业务子模块
       // { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' }
     ]

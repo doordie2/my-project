@@ -51,7 +51,7 @@ export class AllDataComponent implements OnInit {
 
     for (let i = 0; i < 120; i += 1) {
       this.chartData.push({
-        x:(new Date().getTime()) + (1000 * 60 * 30 *24* i),
+        x:(new Date().getTime()) + (1000 * 60 * 60 *24* i),
         y1: Math.floor(Math.random() * 100) + 10,
       });
     }

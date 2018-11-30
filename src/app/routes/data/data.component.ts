@@ -52,11 +52,6 @@ export class DataComponent implements OnInit {
         y: Math.floor(Math.random() * 1000) + 200,
       });
     }
-    /*this.http.get('/chart').subscribe((res: any) => {
-      this.data = res;
-      this.loading = false;
-    });*/
-
     this.loading = false;
   }
 
