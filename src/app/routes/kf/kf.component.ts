@@ -104,7 +104,6 @@ export class KfComponent implements OnInit {
             nzComponentParams: {
               item: item
             },
-            nzFooter:null,
             nzOnOk:(kfModal)=>{
               kfModal.ok(this.st);
             }

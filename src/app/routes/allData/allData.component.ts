@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import { DA_SERVICE_TOKEN, TokenService } from '@delon/auth';
-import { BaseConfig } from '../../app.config';
+import { DatePipe } from '@angular/common';
 import { getTimeDistance } from '@delon/util';
+import { BaseConfig } from '../../app.config';
+const DataSet = require('@antv/data-set');
 
 @Component({
   selector: 'app-data',
@@ -14,68 +16,113 @@ export class AllDataComponent implements OnInit {
   constructor(
     private http: _HttpClient,
     @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService,
+    private datePipe:DatePipe
   ) {
   }
 
-  totalSales: String;
-  serviceNum: String;
-  consultNum: String;
-  reversionRate: String;
-  salesData: any[] = [];
-  data: any[] = [];
-  chartData: any[] = [];
+  //多条折线图配置
+  data1;
+  scale = [{
+    dataKey: 'x',
+  }];
+  style = { stroke: '#fff', lineWidth: 1 };
 
-  ngOnInit() {
+  //单条折线图配置
+  data2;
+  scale2 = [{
+    dataKey: 'x',
+  }];
 
-    this.http.get(BaseConfig.host+'/getData').subscribe((res: any) => {
 
-
-      this.totalSales = res.data['totalSales'];
-      this.serviceNum = res.data['serviceNum'];
-      this.consultNum = res.data['consultNum'];
-      this.reversionRate = res.data['reversionRate'];
-    });
-
-    this.http.get(BaseConfig.host+'/getDatas').subscribe((res: any) => {
-      this.salesData = res.data;
-    });
-
-    for (let i = 0; i < 12; i += 1) {
-      this.datas.salesData.push({
-        x: `${i + 1}月`,
-        y: Math.floor(Math.random() * 10)/100,
-      });
-    }
-
-    this.loading = false;
-
-    for (let i = 0; i < 120; i += 1) {
-      this.chartData.push({
-        x:(new Date().getTime()) + (1000 * 60 * 60 *24* i),
-        y1: Math.floor(Math.random() * 100) + 10,
-      });
-    }
-  }
-
+  todayUserCount:any={};
+  yesterdayUserCount:any={};
+  dailyRingRatio:String;
+  dailyRingRatioStatus:String;
+  sumCashRingRatio:String;
+  sumCashRingRatioStatus:String;
+  weekRatio:String;
+  weekRatioStatus:String;
   datas: any = {
     salesData: [],
     offlineData: [],
   };
   loading = true;
   date_range: Date[] = [];
+  name:String;
+  radio;
+
+  ngOnInit(): void{
+    this.reload(7);
+  }
+
+  reload(day:number){
+    this.loading=true;
+    this.datas.salesData.length=0;
+    this.datas.offlineData.length=0;
+
+    this.http.get(BaseConfig.host+"/dataCount/getData",{day:day}).subscribe((res:any)=>{
+      let dataList=res.data.data;
+      this.todayUserCount=res.data.todayUserCount;
+      //转化率
+      this.radio=(this.todayUserCount.orderUserCount/this.todayUserCount.activeUserCount==0?1:this.todayUserCount.activeUserCount)*100;
+      this.yesterdayUserCount=dataList[1];
+      this.dailyRingRatio=res.data.dailyRingRatio;
+      this.dailyRingRatioStatus=res.data.dailyRingRatioStatus;
+      this.sumCashRingRatio=res.data.sumCashRingRatio;
+      this.sumCashRingRatioStatus=res.data.sumCashRingRatioStatus;
+      this.weekRatio=res.data.weekRatio;
+      this.weekRatioStatus=res.data.weekRatioStatus;
+
+      //日活量柱状图数据
+      for (let i = dataList.length-1; i >=0; i--) {
+        let x=this.datePipe.transform(dataList[i].createTime,"MM-dd");
+        this.datas.salesData.push({
+          x: x,
+          dailyActivity: dataList[i].dailyActivity,
+        });
+      }
+      let dv1 = new DataSet.View().source(this.datas.salesData);
+      dv1.transform({
+        type: 'fold',
+        fields: ['dailyActivity'],
+        key: 'city',
+        value: 'temperature',
+      });
+      let data1=dv1.rows;
+      this.data1 = data1;
+      console.log("单条折线图"+JSON.stringify(this.data1))
+
+      //佣金折线图和新增用户数量折线图
+      for (let i = dataList.length-1; i >=0; i--) {
+        this.datas.offlineData.push({
+          x:this.datePipe.transform(dataList[i].createTime,"MM-dd"),//
+          sumCash: dataList[i].sumCash,//
+          newUserCount:dataList[i].newUserCount,//
+        });
+      }
+
+      let dv = new DataSet.View().source(this.datas.offlineData);
+      dv.transform({
+        type: 'fold',
+        fields: ['sumCash', 'newUserCount'],
+        key: 'city',
+        value: 'temperature',
+      });
+      let data2 = dv.rows;
+      this.data2=data2;
+      console.log("多条折线图"+JSON.stringify(this.data2))
+    })
+    this.loading = false;
+  }
+
+
 
   setDate(type: any) {
-    this.loading=true;
-    this.date_range = getTimeDistance(type);
-
-    this.datas.salesData=[];
-    for (let i = 0; i < 12; i += 1) {
-      this.datas.salesData.push({
-        x: `${i + 1}月`,
-        y: Math.floor(Math.random() * 10) + 225,
-      });
+    if (type=='-6'){
+      this.reload(7)
+    } else {
+      this.reload(30);
     }
-
-    this.loading=false
+    this.date_range = getTimeDistance(type);
   }
 }

@@ -1,0 +1,16 @@
+<div class="app" style="text-align:center">
+<div class="icon pt-md">
+  <i nz-icon type="check-circle" class="text-success icon-lg"></i>
+</div>
+<h1 class="h2 pt-md">充值成功</h1>
+<div sv-container col="1" labelWidth="450" class="extra">
+  <sv label="支付交易号">{{this.tradeNo}}</sv>
+  <sv label="转账金额"><strong class="text-lg pr-sm">{{this.total_amount}}</strong>元</sv>
+</div>
+  <div nz-row class="my-md py-md">
+    <div nz-col>
+      <button nz-button (click)='again()' [nzType]="'primary'">再转一笔</button>
+      <button nz-button class="ml-sm" (click)='history()'>查看账单</button>
+    </div>
+  </div>
+</div>

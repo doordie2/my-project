@@ -25,6 +25,7 @@ import { GroupComponent } from './group/group.component';
 import { KfModalComponent } from './kf/kf.modal.component';
 import { AllDataComponent } from './allData/allData.component';
 import { PersonalRoutingModule } from './personal/personal-routing.module';
+import { ViserModule } from 'viser-ng';
 
 
 const COMPONENTS = [
@@ -52,7 +53,7 @@ const COMPONENTS = [
 const COMPONENTS_NOROUNT = [ComtextModalComponent,KfModalComponent];
 
 @NgModule({
-  imports: [ SharedModule, RouteRoutingModule,DelonAuthModule.forRoot() ],
+  imports: [ SharedModule, RouteRoutingModule,DelonAuthModule.forRoot(),ViserModule ],
   declarations: [
     ...COMPONENTS,
     ...COMPONENTS_NOROUNT

@@ -2,24 +2,22 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@shared/shared.module';
 import { PersonalRoutingModule } from './personal-routing.module';
-import { PersonalComponent } from './center/personal.component';
+import { RechargeRecordComponent } from './rechargeRecord/rechargeRecord.component';
 import { ProAccountSettingsComponent } from './settings/settings.component';
-import { Step1Component } from './step-form/step1.component';
-import { Step2Component } from './step-form/step2.component';
-import { Step3Component } from './step-form/step3.component';
-import { StepFormComponent } from './step-form/step-form.component';
+import { RechargeComponent } from './recharge/recharge.component';
+import { PersonalInfoComponent } from './personalInfo/personalInfo.component';
+import { RechargeSuccessComponent } from './rechargeSuccess/rechargeSuccess.component';
 
 const COMPONENTS_NOROUNT = [];
 
 @NgModule({
   imports: [SharedModule, PersonalRoutingModule],
   declarations: [
-    PersonalComponent,
+    RechargeRecordComponent,
     ProAccountSettingsComponent,
-    Step1Component,
-    Step2Component,
-    Step3Component,
-    StepFormComponent,
+    RechargeComponent,
+    PersonalInfoComponent,
+    RechargeSuccessComponent,
     ...COMPONENTS_NOROUNT,
   ],
   entryComponents: COMPONENTS_NOROUNT,

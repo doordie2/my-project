@@ -6,11 +6,11 @@ import { STColumn, STComponent, STData, STReq, STRes } from '@delon/abc';
 import { map, tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-personal',
-  templateUrl: './personal.component.html',
+  selector: 'app-personalInfo',
+  templateUrl: './personalInfo.component.html',
   providers: [ SocialService ]
 })
-export class PersonalComponent implements OnInit{
+export class PersonalInfoComponent implements OnInit{
 
   constructor(
     private http: _HttpClient,

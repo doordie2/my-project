@@ -28,16 +28,12 @@ export class ProAccountSettingsComponent implements AfterViewInit, OnDestroy {
       title: '个人信息',
     },
     {
-      key: 'cash',
+      key: 'recharge',
       title: '账户充值',
     },
     {
-      key: 'binding',
+      key: 'rechargeRecord',
       title: '充值记录',
-    },
-    {
-      key: 'notification',
-      title: '新消息通知',
     },
   ];
   constructor(

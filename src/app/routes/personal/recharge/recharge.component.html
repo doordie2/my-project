@@ -1,0 +1,17 @@
+<div se-container="1" labelWidth="100" style="padding-top: 20px">
+  <se label="充值方式" error="请输入收款账户" required>
+      <i></i>
+    <img src="../../assets/zhifubao.png" style="width: 300px;height: 100px">
+  </se>
+  <se label="充值金额" error="请输入转账金额，且1至100万以内" required>
+    <input nz-input id="amount" [(ngModel)]="amount" nzAddonAfter="￥" style="width: 200px;" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+  </se>
+  <se>
+    <button nz-button nzType="primary" (click)="_submitForm()">确认充值</button>
+  </se>
+</div>
+<div class="border-top-1 mt-lg px-lg text-grey-dark">
+  <h3 class="h3 my-md">说明</h3>
+  <h4 class="h4 mb-sm">转账到支付宝账户</h4>
+  <p class="mb-sm">如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
+</div>

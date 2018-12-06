@@ -25,6 +25,7 @@ export class DataComponent implements OnInit {
   data: any[] = [];
   selectData:any[]=[];
   selectedValue:String;
+  display=false;
 
   ngOnInit() {
 
@@ -72,5 +73,9 @@ export class DataComponent implements OnInit {
 
   setDate(type: any) {
     this.date_range = getTimeDistance(type);
+  }
+
+  displays(){
+    this.display=true;
   }
 }

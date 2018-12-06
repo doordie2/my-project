@@ -22,7 +22,6 @@ import { JWTGuard, SimpleGuard } from '@delon/auth';
 import { ComtextComponent } from './comtext/comtext.component';
 import { GroupComponent } from './group/group.component';
 import { AllDataComponent } from './allData/allData.component';
-import { PersonalComponent } from './personal/center/personal.component';
 
 const routes: Routes = [
   {
@@ -30,12 +29,12 @@ const routes: Routes = [
     component: LayoutDefaultComponent,
     children: [
       { path: '', redirectTo: 'allData', pathMatch: 'full' },
-      { path: 'allData', component: AllDataComponent,canActivate: [JWTGuard ],data: { title: '总量统计', titleI18n: 'allData'} },
-      { path: 'data', component: DataComponent,canActivate: [JWTGuard ],data: { title: '客服统计', titleI18n: 'data'} },
-      { path: 'kf', component: KfComponent, canActivate: [JWTGuard ],data: { title: '客服管理', titleI18n: 'kf' } },
-      { path: 'account', component: AccountComponent, canActivate: [SimpleGuard ],data: { title: '账号管理', titleI18n: 'account' } },
-      { path: 'comtext', component: ComtextComponent, canActivate: [SimpleGuard ],data: { title: '快捷语', titleI18n: 'comtext' } },
-      { path: 'group', component: GroupComponent, canActivate: [SimpleGuard ],data: { title: '群发助手', titleI18n: 'group' } },
+      { path: 'allData', component: AllDataComponent,canActivate: [JWTGuard ],data: { title: '总量统计', titleI18n: '总量统计'} },
+      { path: 'data', component: DataComponent,canActivate: [JWTGuard ],data: { title: '客服统计', titleI18n: '客服统计'} },
+      { path: 'kf', component: KfComponent, canActivate: [JWTGuard ],data: { title: '客服管理', titleI18n: '客服管理' } },
+      { path: 'account', component: AccountComponent, canActivate: [SimpleGuard ],data: { title: '账号管理', titleI18n: '账号管理' } },
+      { path: 'comtext', component: ComtextComponent, canActivate: [SimpleGuard ],data: { title: '快捷语', titleI18n: '快捷语' } },
+      { path: 'group', component: GroupComponent, canActivate: [SimpleGuard ],data: { title: '群发助手', titleI18n: '群发助手' } },
       { path: 'personal', loadChildren: './personal/personal.module#PersonalModule' },
       // 业务子模块
       // { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' }

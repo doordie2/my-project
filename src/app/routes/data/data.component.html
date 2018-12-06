@@ -1,9 +1,9 @@
 <page-header [title]="'数据统计'">
-  <nz-select style="width: 300px" [(ngModel)]="selectedValue">
+  <nz-select style="width: 300px" [(ngModel)]="selectedValue" (ngModelChange)="displays()">
     <nz-option *ngFor="let select of selectData" [nzLabel]="select.kfNickName" [nzValue]="select.kfId"></nz-option>
   </nz-select>
 </page-header>
-<div nz-row nzGutter="16">
+<div nz-row nzGutter="16" *ngIf="display">
   <div nz-col nzXs="24" nzMd="6">
     <nz-card [nzBordered]="false" [nzTitle]="a">
       <ng-template #a>
