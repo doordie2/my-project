@@ -11,6 +11,7 @@ import {
 } from '@delon/auth';
 import { ReuseTabService } from '@delon/abc';
 import { StartupService } from '@core/startup/startup.service';
+import { BaseConfig } from '../../../app.config';
 
 @Component({
   selector: 'passport-login',
@@ -106,7 +107,7 @@ export class UserLoginComponent implements OnDestroy {
     // 默认配置中对所有HTTP请求都会强制[校验](https://ng-alain.com/auth/getting-started) 用户 Token
     // 然一般来说登录请求不需要校验，因此可以在请求URL加上：`/login?_allow_anonymous=true` 表示不触发用户 Token 校验
     this.loading = true;
-    this.http.post("http://localhost:81/v1/imweb/user/login?_allow_anonymous=true",{username:this.userName.value,password:this.password.value}).subscribe((res)=>{
+    this.http.post(BaseConfig.host+"/v1/imweb/user/login?_allow_anonymous=true",{username:this.userName.value,password:this.password.value}).subscribe((res)=>{
       if (res['status']==200) {
           this.result=res['data'];
         // 清空路由复用信息

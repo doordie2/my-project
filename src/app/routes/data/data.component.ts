@@ -8,8 +8,8 @@ const DataSet = require('@antv/data-set');
 
 @Component({
   selector: 'app-data',
-  templateUrl: './allData.component.html',
-  styleUrls: ['./allData.component.less'],
+  templateUrl: './data.component.html',
+  styleUrls: ['./data.component.less'],
 })
 export class DataComponent implements OnInit {
 
