@@ -5,9 +5,9 @@
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
-            <input nz-input formControlName="userName" placeholder="请输入账户名">
+            <input nz-input formControlName="userName" placeholder="请输入账户名" [(ngModel)]="username">
           </nz-input-group>
-          <nz-form-explain *ngIf="userName.dirty && userName.errors">请输入账户名！</nz-form-explain>
+          <nz-form-explain *ngIf="userNameCheck && userName.errors">请输入正确的账户名！</nz-form-explain>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
