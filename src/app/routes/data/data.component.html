@@ -3,110 +3,199 @@
     <nz-option *ngFor="let select of selectData" [nzLabel]="select.kfNickName" [nzValue]="select.kfId"></nz-option>
   </nz-select>
 </page-header>
-<div nz-row nzGutter="16" *ngIf="display">
-  <div nz-col nzXs="24" nzMd="6">
-    <nz-card [nzBordered]="false" [nzTitle]="a">
-      <ng-template #a>
-        <small class="text-sm font-weight-normal">总销售额
-        </small>
+<div nz-row [nzGutter]="24" class="pt-lg" *ngIf="display">
+  <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="4">
+    <g2-card [title]="'今日新增用户数量'" total={{this.todayUserCount.newUserCount}} contentHeight="44px" [action]="action1"
+             [footer]="footer1">
+      <ng-template #action1>
+        <nz-tooltip [nzTitle]="title1">
+          <i nz-tooltip nz-icon type="info-circle"></i>
+        </nz-tooltip>
       </ng-template>
-      <span>{{totalSales}}</span>
-    </nz-card>
+      <ng-template #title1>
+        <p>日环比：昨日数据-前日数据/前日数据</p>
+      </ng-template>
+      <!--<trend flag="{{this.weekRatioStatus}}" style="display:block; margin-top:2px;">
+        周同比
+        <span class="pl-sm">{{this.weekRatio}}</span>
+      </trend>-->
+      <trend flag="{{this.dailyRingRatioStatus}}">
+        日环比
+        <span class="pl-sm">{{this.dailyRingRatio}}%</span>
+      </trend>
+      <ng-template #footer1>
+        <p class="text-truncate mb0">
+          昨日新增用户数量
+          <span class="ml-sm">{{this.yesterdayUserCount.newUserCount}}</span>
+        </p>
+      </ng-template>
+    </g2-card>
   </div>
-  <div nz-col nzXs="24" nzMd="6">
-    <nz-card [nzTitle]="b" [nzBordered]="false">
-      <ng-template #b>
-        <small class="text-sm font-weight-normal">客服数量
-        </small>
+  <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="4">
+    <g2-card [title]="'今日佣金'" total={{this.todayUserCount.sumCash}} contentHeight="44px" [action]="action2"
+             [footer]="footer2">
+      <ng-template #action2>
+        <nz-tooltip [nzTitle]="title2">
+          <i nz-tooltip nz-icon type="info-circle"></i>
+        </nz-tooltip>
       </ng-template>
-      <span>{{serviceNum}}</span>
-    </nz-card>
+      <ng-template #title2>
+        <p>日环比：昨日数据-前日数据/前日数据</p>
+      </ng-template>
+      <!--<trend flag="up" style="display:block; margin-top:2px;">
+        周同比
+        <span class="pl-sm">12%</span>
+      </trend>-->
+      <trend flag="{{this.sumCashRingRatioStatus}}">
+        日环比
+        <span class="pl-sm">{{this.sumCashRingRatio}}%</span>
+      </trend>
+      <ng-template #footer2>
+        <p class="text-truncate mb0">
+          昨日佣金
+          <span class="ml-sm">{{this.yesterdayUserCount.sumCash}}</span>
+        </p>
+      </ng-template>
+    </g2-card>
   </div>
-  <div nz-col nzXs="24" nzMd="6">
-    <nz-card [nzBordered]="false" [nzTitle]="c">
-      <ng-template #c>
-        <small class="text-sm font-weight-normal">今日咨询人数
-        </small>
+  <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="4">
+    <g2-card [title]="'转化率'" total={{this.radio}}% contentHeight="46px" [action]="action4"
+             [footer]="footer3">
+      <ng-template #action4>
+        <nz-tooltip [nzTitle]="title">
+          <i nz-tooltip nz-icon type="info-circle"></i>
+        </nz-tooltip>
       </ng-template>
-      <span>{{consultNum}}</span>
-    </nz-card>
+      <g2-mini-progress height="46" percent={{this.radio}} strokeWidth="8" target="80" color="#13C2C2"></g2-mini-progress>
+      <ng-template #footer3>
+        <p class="text-truncate mb0">
+          <span>下单人数/查券用户</span>
+        </p>
+      </ng-template>
+    </g2-card>
   </div>
-  <div nz-col nzXs="24" nzMd="6">
-    <nz-card [nzBordered]="false" [nzTitle]="d">
-      <ng-template #d>
-        <small class="text-sm font-weight-normal">回复率
-        </small>
+  <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="4">
+    <g2-card [title]="'日活量'" total={{this.todayUserCount.dailyActivity}} contentHeight="44px" [action]="action3"
+             [footer]="footer4">
+      <ng-template #action3>
+        <nz-tooltip [nzTitle]="title">
+          <i nz-tooltip nz-icon type="info-circle"></i>
+        </nz-tooltip>
       </ng-template>
-      <span>{{reversionRate}}</span>
-    </nz-card>
+      <ng-template #title>
+        <p>这是你要的算法</p>
+      </ng-template>
+      <!--<trend flag="up" style="display:block; margin-top:2px;">
+        周同比
+        <span class="pl-sm">12%</span>
+      </trend>
+      <trend flag="down">
+        日环比
+        <span class="pl-sm">11%</span>
+      </trend>-->
+      <ng-template #footer4>
+        <p class="text-truncate mb0">
+          昨日用户活跃度
+          <span class="ml-sm">{{this.yesterdayUserCount.dailyActivity}}</span>
+        </p>
+      </ng-template>
+    </g2-card>
+  </div>
+  <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="4">
+    <g2-card [title]="'消息总数量'" total={{this.todayUserCount.infoNum}} contentHeight="44px" [action]="action4"
+             [footer]="footer5">
+      <ng-template #action4>
+        <nz-tooltip [nzTitle]="title4">
+          <i nz-tooltip nz-icon type="info-circle"></i>
+        </nz-tooltip>
+      </ng-template>
+      <ng-template #title4>
+        <p>这是你要的算法</p>
+      </ng-template>
+      <!--<trend flag="up" style="display:block; margin-top:2px;">
+        周同比
+        <span class="pl-sm">12%</span>
+      </trend>
+      <trend flag="down">
+        日环比
+        <span class="pl-sm">11%</span>
+      </trend>-->
+      <ng-template #footer5>
+        <p class="text-truncate mb0">
+          昨日消息数量
+          <span class="ml-sm">{{this.yesterdayUserCount.infoNum}}</span>
+        </p>
+      </ng-template>
+    </g2-card>
+  </div>
+  <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="4">
+    <g2-card [title]="'新增下单人数'" total={{this.todayUserCount.newOrderUserCount}} contentHeight="44px" [action]="action5"
+             [footer]="footer6">
+      <ng-template #action5>
+        <nz-tooltip [nzTitle]="title">
+          <i nz-tooltip nz-icon type="info-circle"></i>
+        </nz-tooltip>
+      </ng-template>
+      <ng-template #title>
+        <p>这是你要的算法</p>
+      </ng-template>
+      <!--<trend flag="up" style="display:block; margin-top:2px;">
+        周同比
+        <span class="pl-sm">12%</span>
+      </trend>
+      <trend flag="down">
+        日环比
+        <span class="pl-sm">11%</span>
+      </trend>-->
+      <ng-template #footer6>
+        <p class="text-truncate mb0">
+          昨日新增下单人数
+          <span class="ml-sm">{{this.yesterdayUserCount.newOrderUserCount}}</span>
+        </p>
+      </ng-template>
+    </g2-card>
   </div>
 </div>
 
-<div nz-row nzGutter="16">
-  <div nz-col nzXs="24" nzMd="24">
-    <nz-card [nzBordered]="false" [nzTitle]="e">
-      <ng-template #e>
-        <small class="text-sm font-weight-normal">近30天日活统计</small>
-      </ng-template>
-      <g2-bar height="275" [data]="salesData"></g2-bar>
-    </nz-card>
-  </div>
-</div>
-
-<nz-card [nzLoading]="loading" [nzBordered]="false" class="ant-card__body-nopadding sales-card">
-  <nz-tabset [nzTabBarExtraContent]="extraTemplate">
-    <nz-tab [nzTitle]="'销售额'">
-      <div nz-row>
-        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="16">
-          <div class="bar">
-            <g2-bar height="295" [title]="'销售趋势'" [data]="datas.salesData"></g2-bar>
-          </div>
-        </div>
-        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8">
-          <div class="rank">
-            <h4 class="ranking-title">{{ '门店销售额排名'}}</h4>
-            <ul class="rank-list">
-              <li *ngFor="let i of rankingListData; let idx = index">
-                <span class="number" [ngClass]="{'active': idx < 3}">{{idx+1}}</span>
-                <span class="title">{{i.title}}sss{{idx+1}}</span>
-                <span class="value">{{i.total | number: '3.0'}}</span>
-              </li>
-            </ul>
-          </div>
+<nz-card [nzLoading]="loading" [nzBordered]="false"
+         class="ant-card__body-nopadding sales-card" *ngIf="display">
+  <nz-tabset [nzTabBarExtraContent]="extraTemplate" style="height: 500px">
+    <nz-tab [nzTitle]="'日活量'">
+      <div nz-row style="padding-left: 10px;padding-right: 10px">
+        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="24">
+          <v-chart [forceFit]="true" [height]="400" [data]="data1" [scale]="scale">
+            <v-tooltip></v-tooltip>
+            <v-axis></v-axis>
+            <v-legend></v-legend>
+            <v-line position="x*temperature" color="city"></v-line>
+            <v-point position="x*temperature" color="city" [size]="4" [style]="style" shape="circle"></v-point>
+          </v-chart>
         </div>
       </div>
     </nz-tab>
-    <nz-tab [nzTitle]="'客流量'">
-      <div nz-row>
-        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="16">
-          <div class="bar">
-            <g2-bar height="295" [title]="'销售趋势'" [data]="datas.salesData"></g2-bar>
-          </div>
-        </div>
-        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8">
-          <div class="rank">
-            <h4 class="ranking-title">{{ '门店销售额排名'}}</h4>
-            <ul class="rank-list">
-              <li *ngFor="let i of rankingListData; let idx = index">
-                <span class="number" [ngClass]="{'active': idx < 3}">{{idx+1}}</span>
-                <span class="title">{{i.title}}{{idx+1}}</span>
-                <span class="value">{{i.total | number: '3.0'}}</span>
-              </li>
-            </ul>
-          </div>
+    <nz-tab [nzTitle]="'佣金收益/新增用户'">
+      <div nz-row style="padding-left: 20px">
+        <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="24">
+          <v-chart [forceFit]="true" [height]="400" [data]="data2" [scale]="scale">
+            <v-tooltip></v-tooltip>
+            <v-axis></v-axis>
+            <v-legend></v-legend>
+            <v-line position="x*temperature" color="city"></v-line>
+            <v-point position="x*temperature" color="city" [size]="4" [style]="style" shape="circle"></v-point>
+          </v-chart>
         </div>
       </div>
     </nz-tab>
     <ng-template #extraTemplate>
       <div class="sales-extra-wrap">
         <div class="sales-extra">
-          <a (click)="setDate('-today')">昨日</a>
-          <a (click)="setDate('week')">本周</a>
-          <a (click)="setDate('month')">本月</a>
-          <a (click)="setDate('year')">本年</a>
+          <a (click)="setDate('-6')">近七天</a>
+          <a (click)="setDate('-29')">近30天</a>
         </div>
-        <nz-range-picker [(ngModel)]="date_range" style="display:inline-block; width: 256px;"></nz-range-picker>
+        <nz-range-picker [(ngModel)]="date_range"
+                         style="display:inline-block; width: 256px;"></nz-range-picker>
       </div>
     </ng-template>
   </nz-tabset>
 </nz-card>
+
