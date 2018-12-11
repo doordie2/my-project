@@ -1,5 +1,6 @@
 <page-header [title]="'数据统计'">
-  <nz-select style="width: 300px" [(ngModel)]="selectedValue" (ngModelChange)="displays()">
+  <nz-select style="width: 300px" [(ngModel)]="selectedValue"
+             (ngModelChange)="displays()" *ngIf="isLoading">
     <nz-option *ngFor="let select of selectData" [nzLabel]="select.kfNickName" [nzValue]="select.kfId"></nz-option>
   </nz-select>
 </page-header>

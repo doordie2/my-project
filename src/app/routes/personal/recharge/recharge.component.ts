@@ -18,7 +18,7 @@ export class RechargeComponent implements OnInit {
     ngOnInit() {
   }
   _submitForm() {
-      if (this.amount<= 0) {
+      if (this.amount<= 0|| this.amount==null) {
         this.msg.error("请输入正整数");
         return;
       }

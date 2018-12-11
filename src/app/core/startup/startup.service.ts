@@ -113,13 +113,17 @@ export class StartupService {
             text: '快捷语',
             link: '/comtext',
             icon: { type: 'icon', value: 'edit' }
-          },{
+          },/*{
             text: '群发助手',
             link: '/group',
             icon: { type: 'icon', value: 'rocket' }
-          },{
+          },*/{
             text: '个人中心',
             link: '/personal/center/settings',
+            icon: { type: 'icon', value: 'rocket' }
+          },{
+            text: '朋友圈发送',
+            link: '/send',
             icon: { type: 'icon', value: 'rocket' }
           }
         ]

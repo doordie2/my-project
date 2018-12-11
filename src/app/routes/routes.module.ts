@@ -26,6 +26,8 @@ import { KfModalComponent } from './kf/kf.modal.component';
 import { AllDataComponent } from './allData/allData.component';
 import { PersonalRoutingModule } from './personal/personal-routing.module';
 import { ViserModule } from 'viser-ng';
+import { FriendCircleComponent } from './friendCircle/friendCircle.component';
+import { NgxDnDModule } from '@swimlane/ngx-dnd';
 
 
 const COMPONENTS = [
@@ -47,13 +49,14 @@ const COMPONENTS = [
   ComtextModalComponent,
   GroupComponent,
   KfModalComponent,
-  AllDataComponent
+  AllDataComponent,
+  FriendCircleComponent
 
 ];
 const COMPONENTS_NOROUNT = [ComtextModalComponent,KfModalComponent];
 
 @NgModule({
-  imports: [ SharedModule, RouteRoutingModule,DelonAuthModule.forRoot(),ViserModule ],
+  imports: [ SharedModule, RouteRoutingModule,DelonAuthModule.forRoot(),ViserModule,NgxDnDModule ],
   declarations: [
     ...COMPONENTS,
     ...COMPONENTS_NOROUNT

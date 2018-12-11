@@ -4,6 +4,7 @@ import { _HttpClient } from '@delon/theme';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { STColumn, STComponent, STData, STReq, STRes } from '@delon/abc';
 import { map, tap } from 'rxjs/operators';
+import { BaseConfig } from '../../../app.config';
 
 @Component({
   selector: 'app-rechargeRecord',
@@ -25,7 +26,7 @@ export class RechargeRecordComponent implements OnInit{
     status: null,
     statusList: [],
   };
-  data='http://localhost:81/center/getRechargeRecord';
+  data=BaseConfig.host+'/center/getRechargeRecord';
   loading = false;
   status = [
     { index: 0, text: '支付宝', value: false, type: 'default', checked: false },

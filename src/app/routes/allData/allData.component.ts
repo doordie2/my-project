@@ -61,6 +61,7 @@ export class AllDataComponent implements OnInit {
     this.datas.offlineData.length=0;
 
     this.http.get(BaseConfig.host+"/dataCount/getData",{day:day}).subscribe((res:any)=>{
+
       let dataList=res.data.data;
       this.todayUserCount=res.data.todayUserCount;
       //转化率

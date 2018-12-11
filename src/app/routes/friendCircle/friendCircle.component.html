@@ -1,0 +1,106 @@
+<page-header [title]="'发送朋友圈'">
+</page-header>
+<nz-card [nzBordered]="false"
+         class="ant-card__body-nopadding sales-card">
+  <nz-tabset>
+    <nz-tab [nzTitle]="'发朋友圈'">
+      <form nz-form [formGroup]="form" (ngSubmit)="submit()" se-container="1" labelWidth="200" style="padding-bottom: 30px">
+        <se label="采集内容" error="请输入采集内容" required>
+          <textarea nz-input formControlName="content" [nzAutosize]="{minRows: 4}" placeholder="请输入相匹配的优惠券和商品，否则可能打不开。不支持淘宝外部短链接" style="width: 600px"></textarea>
+        </se>
+        <se label="朋友圈标题" error="请输入朋友圈标题" required>
+          <textarea nz-input formControlName="title" [nzAutosize]="{minRows: 4}" placeholder="请输入朋友圈标题" style="width: 600px"></textarea>
+        </se>
+        <se label="发送时间" error="请输入标题" required>
+          <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" nzPlaceHolder="发送时间" (nzOnOk)="onOk($event)"></nz-date-picker>
+        </se>
+        <se label="设备方案" error="请输入设备方案" required>
+          <nz-select id="gender" formControlName="device" nzPlaceHolder="请选择设备方案" style="width: 300px">
+            <nz-option *ngFor="let select of selectData" [nzLabel]="select.kfNickName" [nzValue]="select.kfId"></nz-option>
+          </nz-select>
+          <span>不选择默认发送所有设备</span>
+        </se>
+        <se label="分批发送" error="请输入分批发送数值" required>
+          <nz-input-number formControlName="time" placeholder="请输入"></nz-input-number>
+          <span>(设备与设备之间的间隔单位(秒))</span>
+        </se>
+        <se label="朋友圈图片" optionalHelp="朋友圈图片" error="请输入衡量标准">
+          <div class="clearfix">
+            <nz-upload
+            nzAction="https://jsonplaceholder.typicode.com/posts/"
+            nzListType="picture-card"
+            [(nzFileList)]="fileList"
+            [nzShowButton]="fileList.length < 3"
+            [nzPreview]="handlePreview">
+            <i nz-icon type="plus"></i>
+            <div class="ant-upload-text">Upload</div>
+          </nz-upload>
+            <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContents" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
+              <ng-template #modalContents>
+                <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
+              </ng-template>
+            </nz-modal>
+          </div>
+        </se>
+        <se label="评论内容">
+          <div *ngFor="let control of controlArray;let i = index">
+          <textarea nz-input [attr.id]="control.id" [formControlName]="control.controlInstance" [nzAutosize]="{minRows: 4}" placeholder="请输入评论内容" style="width: 600px"></textarea>
+          <i nz-icon type="dingding" class="dynamic-delete-button" (click)="removeField(control,$event)"></i>
+          </div>
+          <div style="background-color: beige;width: 600px;height: 50px">
+            <span>支持参数：[商品标题]、[商品价格]、[优惠券金额]、[券后价]、[淘口令]</span>
+          </div>
+          <button nz-button nzType="dashed" style="width:60%" (click)="addField($event)" style="width: 600px"><i nz-icon type="plus"></i>添加评论内容</button>
+        </se>
+        <se>
+          <button nz-button nzType="primary" type="submit">提交</button>
+          <button nz-button class="ml-sm">保存</button>
+        </se>
+      </form>
+    </nz-tab>
+    <nz-tab [nzTitle]="'设备方案'">
+      <nz-card [nzBordered]="false" style="padding: 20px">
+        <button nz-button (click)="add(modalContent)" [nzType]="'primary'" [nzSize]="'large'" style="margin-bottom: 10px">
+          <i nz-icon type="plus"></i>
+          <span>添加发朋友圈方案</span>
+        </button>
+        <st #st [columns]="columns" [data]="data" [loading]="loading" [req]="req" [res]="res">
+          <ng-template st-row="status" let-i>
+            <nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText"></nz-badge>
+          </ng-template>
+        </st>
+      </nz-card>
+    </nz-tab>
+    <nz-tab [nzTitle]="'发送详情'">
+      <nz-card [nzBordered]="false" style="padding: 20px">
+        <nz-alert style="margin-bottom: 20px"
+          nzType="warning"
+          nzDescription="发朋友圈列表,该表单只保存近期30条数据">
+        </nz-alert>
+
+        <st #st [columns]="columns" [data]="data" [loading]="loading" [req]="req" [res]="res">
+          <ng-template st-row="status" let-i>
+            <nz-badge [nzStatus]="i.statusType" [nzText]="i.statusText"></nz-badge>
+          </ng-template>
+        </st>
+      </nz-card>
+    </nz-tab>
+  </nz-tabset>
+</nz-card>
+<!--设备方案-->
+<ng-template #modalContent>
+  <nz-alert style="margin-bottom: 20px"
+            nzType="warning"
+            nzDescription="温馨提示:改设备方案是发送朋友圈所需要推送的设备方案">
+  </nz-alert>
+  <form nz-form [formGroup]="forms" (ngSubmit)="submit()" se-container="1" labelWidth="100" style="padding-bottom: 30px">
+    <se label="设备方案">
+    <input nz-input formControlName="content" placeholder="请输入设备方案" style="width: 200px">
+    <span>*方案名称</span>
+  </se>
+    <se label="选择设备">
+      <nz-checkbox-group formControlName="image" [(ngModel)]="checkOptionsOne" (ngModelChange)="log($event)"></nz-checkbox-group>
+    </se>
+  </form>
+</ng-template>
+

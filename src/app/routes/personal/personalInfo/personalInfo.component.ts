@@ -4,6 +4,7 @@ import { _HttpClient } from '@delon/theme';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { STColumn, STComponent, STData, STReq, STRes } from '@delon/abc';
 import { map, tap } from 'rxjs/operators';
+import { BaseConfig } from '../../../app.config';
 
 @Component({
   selector: 'app-personalInfo',
@@ -27,7 +28,7 @@ export class PersonalInfoComponent implements OnInit{
     status: null,
     statusList: [],
   };
-  data='http://localhost:81/v1/imweb/robot/list';
+  data=BaseConfig.host+'/v1/imweb/robot/list';
   loading = false;
   status = [
     { index: false, text: '关闭', value: false, type: 'default', checked: false },
@@ -152,7 +153,7 @@ export class PersonalInfoComponent implements OnInit{
       nzOnOk: () => {
         this.loading = true;
         this.http
-          .post('http://localhost:81/v1/imweb/robot/addkf', null,{
+          .post(BaseConfig.host+'/v1/imweb/robot/addkf', null,{
             robotIds:this.selectedRows,
             kfId: this.selectedValue,
           },{headers: {'Content-Type': 'application/x-www-form-urlencoded'}})

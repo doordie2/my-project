@@ -12,7 +12,6 @@ const DataSet = require('@antv/data-set');
   styleUrls: ['./data.component.less'],
 })
 export class DataComponent implements OnInit {
-
   constructor(
     private http: _HttpClient,
     @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService,
@@ -53,12 +52,14 @@ export class DataComponent implements OnInit {
   radio;
   selectData;
   selectedValue;
+  isLoading=false;
 
   ngOnInit(): void{
     //获取客服列表
-    this.http.get('http://localhost:81/v1/imweb/kf/listall').subscribe((res:any)=>{
+    this.http.get(BaseConfig.host+'/v1/imweb/kf/listall').subscribe((res:any)=>{
       this.selectData=res.data;
     });
+    this.isLoading=true;
   }
 
   reload(day:number,kfId:number){
@@ -66,7 +67,8 @@ export class DataComponent implements OnInit {
     this.datas.salesData.length=0;
     this.datas.offlineData.length=0;
 
-    this.http.get(BaseConfig.host+"/dataCount/getData",{day:day,kfId:kfId}).subscribe((res:any)=>{
+    this.http.get(BaseConfig.host+"/dataCount/getKfData",{day:day,kfId:kfId}).subscribe((res:any)=>{
+
       let dataList=res.data.data;
       this.todayUserCount=res.data.todayUserCount;
       //转化率
@@ -134,6 +136,7 @@ export class DataComponent implements OnInit {
   }
 
   displays(){
+    alert(123)
     this.reload(7,this.selectedValue);
   }
 }

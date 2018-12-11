@@ -92,9 +92,9 @@ export class UserLoginComponent implements OnDestroy {
   submit() {
     this.error = '';
     if (this.type === 0) {
-      if(!(/^1[34578]\d{9}$/.test(this.username))){
+      /*if(!(/^1[34578]\d{9}$/.test(this.username))){
         this.userNameCheck=true;
-      }
+      }*/
       this.userName.markAsDirty();
       this.userName.updateValueAndValidity();
       this.password.markAsDirty();
