@@ -22,7 +22,7 @@ import { JWTGuard, SimpleGuard } from '@delon/auth';
 import { ComtextComponent } from './comtext/comtext.component';
 import { GroupComponent } from './group/group.component';
 import { AllDataComponent } from './allData/allData.component';
-import { FriendCircleComponent } from './friendCircle/friendCircle.component';
+import { FriendCircleComponent } from './friendCircle/friendCircle/friendCircle.component';
 
 const routes: Routes = [
   {
@@ -37,7 +37,7 @@ const routes: Routes = [
       { path: 'comtext', component: ComtextComponent, canActivate: [SimpleGuard ],data: { title: '快捷语', titleI18n: '快捷语' } },
       { path: 'group', component: GroupComponent, canActivate: [SimpleGuard ],data: { title: '群发助手', titleI18n: '群发助手' } },
       { path: 'personal', loadChildren: './personal/personal.module#PersonalModule' },
-      { path: 'send', component: FriendCircleComponent, canActivate: [SimpleGuard ],data: { title: '发送朋友圈', titleI18n: '发送朋友圈' } },
+      { path: 'friend', loadChildren: './friendCircle/friendCircle.module#FriendCircleModule' },
       // 业务子模块
       // { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' }
     ]

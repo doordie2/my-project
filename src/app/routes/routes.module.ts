@@ -26,8 +26,9 @@ import { KfModalComponent } from './kf/kf.modal.component';
 import { AllDataComponent } from './allData/allData.component';
 import { PersonalRoutingModule } from './personal/personal-routing.module';
 import { ViserModule } from 'viser-ng';
-import { FriendCircleComponent } from './friendCircle/friendCircle.component';
+import { FriendCircleComponent } from './friendCircle/friendCircle/friendCircle.component';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
+import { Ng2DragDropModule } from 'ng2-drag-drop';
 
 
 const COMPONENTS = [
@@ -49,14 +50,13 @@ const COMPONENTS = [
   ComtextModalComponent,
   GroupComponent,
   KfModalComponent,
-  AllDataComponent,
-  FriendCircleComponent
+  AllDataComponent
 
 ];
 const COMPONENTS_NOROUNT = [ComtextModalComponent,KfModalComponent];
 
 @NgModule({
-  imports: [ SharedModule, RouteRoutingModule,DelonAuthModule.forRoot(),ViserModule,NgxDnDModule ],
+  imports: [ SharedModule, RouteRoutingModule,DelonAuthModule.forRoot(),ViserModule,NgxDnDModule],
   declarations: [
     ...COMPONENTS,
     ...COMPONENTS_NOROUNT

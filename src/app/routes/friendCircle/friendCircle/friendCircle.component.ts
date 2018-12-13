@@ -1,21 +1,28 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
-import { NzMessageService, NzModalService, UploadFile } from 'ng-zorro-antd';
-import { STColumn, STComponent, STReq, STRes } from '@delon/abc';
+import {
+  NzMessageService,
+  NzModalService,
+  UploadFile,
+  UploadXHRArgs,
+} from 'ng-zorro-antd';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { BaseConfig } from '../../app.config';
+import { BaseConfig } from '../../../app.config';
+import { Router } from '@angular/router';
+import { HttpClient, HttpRequest } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-friendCircle',
   templateUrl: './friendCircle.component.html',
   styleUrls: ['./friendCircle.component.less'],
 })
-export class FriendCircleComponent implements OnInit {
+export class FriendCircleComponent implements OnInit{
 
   constructor(
     private fb: FormBuilder,
@@ -23,6 +30,8 @@ export class FriendCircleComponent implements OnInit {
     public msg: NzMessageService,
     private modalSrv: NzModalService,
     private _message: NzMessageService,
+    private router: Router,
+    private https:HttpClient,
   ) {
   }
 
@@ -42,7 +51,7 @@ export class FriendCircleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.form = this.fb.group({
+      this.form = this.fb.group({
       content: [null, [Validators.required]],
       title: [null, [Validators.required]],
       sendTime: [null, [Validators.required]],
@@ -72,7 +81,7 @@ export class FriendCircleComponent implements OnInit {
     }
 
 
-    console.log(this.form.value.say);
+    console.log(this.form.value);
   }
 
   addField(e?: MouseEvent): void {
@@ -101,10 +110,15 @@ export class FriendCircleComponent implements OnInit {
 
   fileList = [
     {
-      uid: -1,
-      name: 'xxx.png',
-      status: 'done',
+      uid:1,
       url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+    },
+    {
+      uid:2,
+      url: 'http://www.baidu.com/yyy.png',
+    },{
+      uid:3,
+    url: 'http://img5.imgtn.bdimg.com/it/u=1486955621,651015270&fm=26&gp=0.jpg',
     },
   ];
   previewImage = '';
@@ -115,68 +129,13 @@ export class FriendCircleComponent implements OnInit {
     this.previewVisible = true;
   };
 
+  a(file: UploadFile){
+    alert(JSON.stringify(file))
+  }
+
   onOk(result: Date): void {
     this.form.value.sendTime = result;
   }
-
-  data = BaseConfig.host + '/v1/imweb/kf/list';
-  @ViewChild('st')
-  st: STComponent;
-
-  //定义请求的参数
-  req: STReq = {
-    reName: {
-      pi: 'page',
-      ps: 'size',
-    },
-  };
-
-  //定义返回的参数
-  res: STRes = {
-    reName: {
-      total: 'data.total',
-      list: 'data.list',
-    },
-  };
-  columns: STColumn[] = [
-    { title: '头像', index: 'avatar',width:'500px'},
-    { title: '昵称', index: 'kfNickName' },
-    {
-      title: '账号',
-      index: 'kfAccessName',
-    },
-    {
-      title: '状态', index: 'online',
-    }, {
-      title: '创建时间',
-      index: 'createTime',
-      type: 'date',
-      sort: {
-        compare: (a: any, b: any) => a.updatedAt - b.updatedAt,
-      },
-    },
-    {
-      title: '操作',
-      buttons: [
-        {
-          text: '删除',
-          click: (item: any) => this.modalSrv.create({
-            nzTitle: '删除',
-            nzContent: '<span>确定删除设备方案</span>',
-            nzOnOk: () => {
-              this.loading = true;
-              this.http
-                .post(BaseConfig.host + '/v1/imweb/kf/delete', null, { kfId: item.kfId })
-                .subscribe(() => {
-                  this.st.reload();
-                });
-            },
-          }),
-        },
-      ],
-    },
-  ];
-
 
   checkOptionsOne = [];
   device=[];
@@ -191,28 +150,44 @@ export class FriendCircleComponent implements OnInit {
     console.log(this.device);
   }
 
-  add(tpl: TemplateRef<{}>) {
-    for (let x = 0; x < 1000; x++) {
-      this.checkOptionsOne.push({
-        label: x,
-          value: x,
-        },
-      );
-    }
-    this.modalSrv.create({
-      nzTitle: '添加客服账号',
-      nzContent: tpl,
-      nzWidth: 1400,
-      nzOnOk: () => {
-        this.loading = true;
-        this.http
-          .post(BaseConfig.host + '/v1/imweb/kf/add', null, {}, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
-          .subscribe(() => {
-
-            this.loading = false;
-            this.st.reload();
-          });
-      },
-    });
+  //输入地址获取图片
+  onBlur(){
+    this.http.get("http://www.taotongxue.cn/mobile/taobao/getPic?itemId="+this.form.value.content).subscribe((res:any)=>{
+      console.log(JSON.stringify(res))
+    })
   }
+
+  //获取商品id
+  onChange(){
+    this.http.post(BaseConfig.host+"/back/sns/regex",null,{"regexText": this.form.value.content}).subscribe((res:any)=>{
+      console.log(JSON.stringify(res))
+    })
+  }
+
+  customReq = (item: UploadXHRArgs) => {
+    alert(JSON.stringify(item))
+    // 构建一个 FormData 对象，用于存储文件或其他参数
+    const formData = new FormData();
+    // tslint:disable-next-line:no-any
+    formData.append('file', item.file as any);
+    formData.append('id', '1000');
+    formData.append('key', item.name);
+    formData.append('token', item.name);
+    const req = new HttpRequest('POST', item.action, formData, {
+      reportProgress: true,
+      withCredentials: true
+    });
+    this.https.request(req).subscribe(()=>{
+
+    })
+  }
+
+  del(item:any){
+    for (let i=0;i<this.fileList.length;i++){
+      if (this.fileList[i].uid==item.uid){
+        this.fileList.splice(i,1);
+      }
+    }
+  }
+
 }

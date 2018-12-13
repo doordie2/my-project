@@ -1,0 +1,39 @@
+<nz-card [nzBordered]="false"
+         class="ant-card__body-nopadding sales-card">
+
+  <nz-card [nzBordered]="false" style="padding: 20px">
+    <button nz-button (click)="add(modalContent)" [nzType]="'primary'"
+            [nzSize]="'large'" style="margin-bottom: 10px">
+      <i nz-icon type="plus"></i>
+      <span>添加发朋友圈方案</span>
+    </button>
+    <st #st [columns]="columns" [data]="data" [loading]="loading"
+        [req]="req" [res]="res">
+      <ng-template st-row="status" let-i>
+        <nz-badge [nzStatus]="i.statusType"
+                  [nzText]="i.statusText"></nz-badge>
+      </ng-template>
+    </st>
+  </nz-card>
+</nz-card>
+<!--设备方案-->
+<ng-template #modalContent>
+  <nz-alert style="margin-bottom: 20px"
+            nzType="warning"
+            nzDescription="温馨提示:改设备方案是发送朋友圈所需要推送的设备方案">
+  </nz-alert>
+  <form nz-form [formGroup]="form" (ngSubmit)="submit()" se-container="1"
+        labelWidth="100" style="padding-bottom: 30px">
+    <se label="设备方案">
+      <input nz-input formControlName="content" placeholder="请输入设备方案"
+             style="width: 200px">
+      <span>*方案名称</span>
+    </se>
+    <se label="选择设备">
+      <nz-checkbox-group formControlName="image" [(ngModel)]="checkOptionsOne"
+                         (ngModelChange)="log($event)"></nz-checkbox-group>
+    </se>
+  </form>
+</ng-template>
+
+

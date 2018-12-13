@@ -122,8 +122,8 @@ export class StartupService {
             link: '/personal/center/settings',
             icon: { type: 'icon', value: 'rocket' }
           },{
-            text: '朋友圈发送',
-            link: '/send',
+            text: '朋友圈',
+            link: '/friend/center/setting',
             icon: { type: 'icon', value: 'rocket' }
           }
         ]
